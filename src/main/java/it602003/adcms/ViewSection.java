@@ -17,7 +17,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+
 import java.awt.Color;
+import javax.swing.ListSelectionModel;
 
 public class ViewSection extends JFrame {
 
@@ -64,8 +66,8 @@ public class ViewSection extends JFrame {
 		contentPane.add(lblHinThChuyn);
 		
 		table = new JTable();
-			
-//		table.setModel(tableData);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				
 		table.setCellSelectionEnabled(true);
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		table.setBounds(66, 113, 997, 430);
@@ -76,14 +78,21 @@ public class ViewSection extends JFrame {
 		String[] columnNames = {"Id", "Name", "Notes"};
 		
 		DefaultTableModel tableData = (DefaultTableModel) table.getModel();
-		
+		tableData.setColumnCount(3);
 		tableData.addRow(columnNames);
-//		for(int i = 0; i < itemsArrayList.size(); i++) {
-//		tableData.setValueAt(itemsArrayList.get(i).getSection_id(), i, 1);
-//		tableData.setValueAt(itemsArrayList.get(i).getSection_name(), i, 2);
-//		tableData.setValueAt(itemsArrayList.get(i).getSection_notes(), i, 3);
-//	}
 
+		for(int i = 0; i < itemsArrayList.size(); i++) {
+			Object[] obj = new Object[] {
+					itemsArrayList.get(i).getSection_id(),
+					itemsArrayList.get(i).getSection_name(),
+					itemsArrayList.get(i).getSection_notes()
+			};
+			tableData.addRow(obj);
+		}	
+		
+		
+		
+		table.setModel(tableData);
 		
 	}
 }

@@ -60,7 +60,7 @@ public class Section {
 					item.setSection_name(rs.getString("section_name"));
 					item.setSection_name_en(rs.getString("section_name_en"));
 					item.setSection_created_author_id(rs.getInt("section_created_author_id"));
-					
+					item.setSection_notes(rs.getString("section_notes"));
 					items.add(item);
 				}
 			}
