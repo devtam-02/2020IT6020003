@@ -88,10 +88,7 @@ public class ViewSection extends JFrame {
 					itemsArrayList.get(i).getSection_notes()
 			};
 			tableData.addRow(obj);
-		}	
-		
-		
-		
+		}
 		table.setModel(tableData);
 		
 	}
