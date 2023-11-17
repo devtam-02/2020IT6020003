@@ -40,7 +40,6 @@ public class ProductCategoryProcess {
 			ProductCategoryObject item;
 			
 			String sql = "SELECT * FROM tblpc ";
-			sql += "";
 			sql += "ORDER BY pc_name ASC ";
 			sql += "LIMIT ?";
 			
@@ -56,6 +55,7 @@ public class ProductCategoryProcess {
 						item.setPc_id(rs.getInt("pc_id"));
 						item.setPc_name(rs.getString("Pc_name"));
 						item.setPc_created_date(rs.getString("Pc_created_date"));
+						
 						items.add(item);
 					}
 				}
@@ -91,13 +91,6 @@ public class ProductCategoryProcess {
 				pre.setInt(3, item.getPc_ps_id());
 				pre.setInt(4, item.getPc_manager_id());
 				pre.setString(5, item.getPc_notes());
-				
-//				pre.setBoolean(6, item.isSection_delete());
-//				pre.setString(7, item.getSection_last_modified());
-//				pre.setInt(8, item.getSection_created_author_id());
-//				pre.setString(9, item.getSection_name_en());
-//				pre.setByte(10, item.getSection_language());
-				
 				//thực thi
 				int result = pre.executeUpdate();
 				if (result==0) {

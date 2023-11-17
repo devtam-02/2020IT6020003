@@ -20,6 +20,7 @@ import javax.swing.table.TableModel;
 
 import java.awt.Color;
 import javax.swing.ListSelectionModel;
+import javax.swing.JScrollPane;
 
 public class ViewSection extends JFrame {
 
@@ -30,7 +31,7 @@ public class ViewSection extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+ 	public static void main(String[] args) {
 		
 		Section s = new Section();
 		
@@ -65,22 +66,25 @@ public class ViewSection extends JFrame {
 		lblHinThChuyn.setFont(new Font("Tahoma", Font.BOLD, 25));
 		contentPane.add(lblHinThChuyn);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(76, 119, 976, 450);
+		contentPane.add(scrollPane);
+		
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				
 		table.setCellSelectionEnabled(true);
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
-		table.setBounds(66, 113, 997, 430);
-		contentPane.add(table);
+		table.setBounds(0, 0, 997, 430);
+		scrollPane.setViewportView(table);
 		
-
 		ArrayList<SectionObject> itemsArrayList = s.getSectionObjects(null, (byte) 20);
+		loadTable(itemsArrayList);
+	}
+	public void loadTable(ArrayList<SectionObject> itemsArrayList) {
 		String[] columnNames = {"Id", "Name", "Notes"};
 		
-		DefaultTableModel tableData = (DefaultTableModel) table.getModel();
-		tableData.setColumnCount(3);
-		tableData.addRow(columnNames);
-
+		DefaultTableModel tableData = new DefaultTableModel();
+		tableData.setColumnIdentifiers(columnNames);
 		for(int i = 0; i < itemsArrayList.size(); i++) {
 			Object[] obj = new Object[] {
 					itemsArrayList.get(i).getSection_id(),
@@ -90,6 +94,31 @@ public class ViewSection extends JFrame {
 			tableData.addRow(obj);
 		}
 		table.setModel(tableData);
-		
 	}
+	
+//	public void loadTable(ArrayList<CategoryObject> itemsArrayList) {
+//		String[] columnNames = {"ID","Name", "SectionId", "Notes", "CreatedDate","AuthorId", "LastModified",
+//				"ManagerId", "Image", "EnglishName", "Language"};
+//		
+//		DefaultTableModel tableData = new DefaultTableModel();
+//		tableData.setColumnIdentifiers(columnNames);
+//		//Chuyển đổi category object sang object
+//		for(int i = 0; i < itemsArrayList.size(); i++) {
+//			Object[] obj = new Object[] {
+//					itemsArrayList.get(i).getCategory_id(),
+//					itemsArrayList.get(i).getCategory_name(),
+//					itemsArrayList.get(i).getCategory_section_id(),
+//					itemsArrayList.get(i).getCategory_notes(),
+//					itemsArrayList.get(i).getCategory_created_date(),
+//					itemsArrayList.get(i).getCategory_created_author_id(),
+//					itemsArrayList.get(i).getCategory_last_modified(),
+//					itemsArrayList.get(i).getCategory_manager_id(),
+//					itemsArrayList.get(i).getCategory_image(),
+//					itemsArrayList.get(i).getCategory_name_en(),
+//					itemsArrayList.get(i).getCategory_language()
+//			};
+//			tableData.addRow(obj);
+//		}
+//		tblCategoryList.setModel(tableData);
+//	}
 }
